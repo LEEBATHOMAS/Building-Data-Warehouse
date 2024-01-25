@@ -6,16 +6,20 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=test_db
     volumes:
-      - "c:/Users/LeebaThomas/repos/myrepos/deBC/data-eng-zoom/data-engineering-zoomcamp/week_1_basics_n_setup/2_docker_sql/postgres_data:/var/lib/postgresql/data:rw"
+      - "/workspaces/Building-Data-Warehouse/requirements/postgres_data:/var/lib/postgresql/data:rw"
     ports:
       - "5432:5432"
+    networks:
+      - pgnetwork
   pgadmin:
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
-      - "8080:80" 
+      - "8080:80"
+    networks:
+      - pgnetwork
 
 networks:
   pgnetwork:
